@@ -12,7 +12,7 @@ Agricultural and Forest Meteorology. DOI: https://doi.org/10.1016/j.agrformet.20
 ### /code/ directory:
 ---------------------
 Within this directory you will find the scripts needed to repeat the analysis. The names of the scripts are 
-prefixed by a number indicating the chronological order the needed to reproduce the analysis.
+prefixed by a number indicating the chronological order needed to reproduce the analysis.
 
 There is also a sub-directory (/z_functions/) where custom written functions are stored.
 
@@ -34,4 +34,4 @@ This folder houses four csv files that store key metadata for running the analys
 
 2. PhenoCam - All PhenoCam data products were downloaded from V2.0 of the public data releases. These data are available for download from the ORNL DAAC (https://daac.ornl.gov/)
 
-3. The datasets generated through the analysis are available upon request from the author.
+3. The intermediary datasets generated through the processing and analysis of the downloaded AmeriFlux and PhenoCam products are available upon request from the author.
