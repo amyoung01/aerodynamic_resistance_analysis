@@ -1,8 +1,8 @@
 # Young_et_al_aerodynamic_resistance_analysis
 
-Author: Adam M. Young, Ph.D.
-Email: adam.young[at]nau.edu
-ORCID: https://orcid.org/0000-0003-2668-2794
+Author: Adam M. Young, Ph.D.  
+Email: adam.young[at]nau.edu  
+ORCID: https://orcid.org/0000-0003-2668-2794  
 
 The code provided in this repository was used to conduct the analysis in the following paper:
 
