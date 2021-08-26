@@ -32,3 +32,10 @@ sensors.
 
 4. variables_to_import_for_fluxsites.csv - This file provides the variable names needed
 for import from the raw data file download from the AmeriFlux webpage.
+
+### Public availability of datasets
+---------------------
+1. AmeriFlux - All AmeriFlux data used in this analysis were downloaded from https://ameriflux.lbl.gov/.  
+Specific versions of the datasets for each site are listed in Table S1.
+
+2. PhenoCam
