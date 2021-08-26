@@ -20,17 +20,17 @@ There is also a sub-directory (/z_functions/) where custom written functions are
 ---------------------
 This folder houses four csv files that store key metadata for running the analysis.
 
-1. mead2_mead3_crop_types.csv - The mead sites change crops about every other year
+1. mead2_mead3_crop_types.csv - The mead sites change crops about every other year  
 between soybean and corn. This file just identifies a given crop for a given year.
 
-2. pheno_flux_sites_to_use.csv - This is a table that houses key metadata, such as
+2. pheno_flux_sites_to_use.csv - This is a table that houses key metadata, such as  
 site names, lat/lon, elevation, PI measured canopy height, etc.
 
-3. profile_metadata.csv - This is the site-specific metadata needed for the wind-profile
+3. profile_metadata.csv - This is the site-specific metadata needed for the wind-profile  
 analysis, including information on the measurement height of wind speed from different 
 sensors.
 
-4. variables_to_import_for_fluxsites.csv - This file provides the variable names needed
+4. variables_to_import_for_fluxsites.csv - This file provides the variable names needed  
 for import from the raw data file download from the AmeriFlux webpage.
 
 ### Public availability of datasets
@@ -38,4 +38,7 @@ for import from the raw data file download from the AmeriFlux webpage.
 1. AmeriFlux - All AmeriFlux data used in this analysis were downloaded from https://ameriflux.lbl.gov/.  
 Specific versions of the datasets for each site are listed in Table S1.
 
-2. PhenoCam
+2. PhenoCam - All PhenoCam data products were downloaded from V2.0 of the public data releases.  
+These data are available for download from the ORNL DAAC (https://daac.ornl.gov/)
+
+3. The datasets generated through the analysis are available upon request from the author.
