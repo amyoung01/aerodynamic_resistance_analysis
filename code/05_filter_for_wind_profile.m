@@ -1,9 +1,8 @@
-% This script is written to go through and filter flux data and export data tables
-% for each flux site. This script requires custom-written functions and a list of
-% flux site codes to process.
+% This script is written to go through and filter flux data for wind profile data
+% analysis.
 %
-% Date Created: 2019-01-04
-% Date Modified:
+% Date Created: 2020-09-01
+% Date Modified: 2021-01-25
 %
 % -----------------------------------------------------------------------------------
 
