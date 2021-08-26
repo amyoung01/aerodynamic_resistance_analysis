@@ -1,17 +1,3 @@
-# ******************************************************************************
-# Calculate daily summaries of flux data needed for path analysis
-# Author: Adam Young
-# contact: adam.young@nau.edu
-# orcid: https://orcid.org/0000-0003-2668-2794
-# Revised for Publication: 2020-11-12
-# Last edited: 2021-04-13
-# Run using R version 4.0.2 (2020-06-22) on a macOS (Mojave/Big Sur)
-# ******************************************************************************
-
-# ******************************************************************************
-# Initialize Workspace #########################################################
-# ******************************************************************************
-
 rm(list = ls()) # Clear all data from workspace
 graphics.off() # Close all current figures and plots
 cat("\14") # Clear command console
