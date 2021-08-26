@@ -9,7 +9,7 @@ The code provided in this repository was used to conduct the analysis in the fol
 Young, A.M., et al. 2021. Seasonality in aerodynamic resistance across a range of North American ecosystems. 
 Agricultural and Forest Meteorology. DOI: https://doi.org/10.1016/j.agrformet.2021.108613
 
-/code/ directory:
+#### /code/ directory:
 ------------------------------
 Within this directory you will find the scripts needed to repeat the analysis. The names of the scripts are 
 prefixed by a number indicating the chronological order the needed to reproduce the analysis.
