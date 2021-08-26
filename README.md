@@ -10,10 +10,11 @@ Young, A.M., et al. 2021. Seasonality in aerodynamic resistance across a range o
 Agricultural and Forest Meteorology. DOI: https://doi.org/10.1016/j.agrformet.2021.108613
 
 ### /code/ directory:
-------------------------------
+---------------------
 Within this directory you will find the scripts needed to repeat the analysis. The names of the scripts are 
 prefixed by a number indicating the chronological order the needed to reproduce the analysis.
 
-There is also a sub-directory (/z_code
+There is also a sub-directory (/z_functions) where custom written functions are stored.
 
-Several data files are 
+### /code/ directory:
+---------------------
