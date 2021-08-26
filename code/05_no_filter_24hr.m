@@ -1,5 +1,5 @@
-% Same as script '2a_filter_for_midday.m' but does not include any filtering.
-% Used for calculating aerodynamic canopy height
+% Same as script '04_filter_for_midday.m' but does not include any filtering.
+% Returns all half-hour (or hour) values. Used for calculating aerodynamic canopy height
 %
 % Date Created: 2019-01-04
 % Date Modified for publication: 2020-11-11
