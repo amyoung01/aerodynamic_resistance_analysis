@@ -1,4 +1,4 @@
-# Young_et_al_aerodynamic_resistance_analysis
+# aerodynamic_resistance_analysis
 
 **Author:** Adam M. Young, Ph.D.  
 **Email:** adam.young[at]nau.edu  
