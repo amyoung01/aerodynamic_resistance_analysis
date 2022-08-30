@@ -1,3 +1,6 @@
+% This matlab script goes through and estimates aerodynamic canopy height at 
+% a three day time step for each site.
+
 clear all; 
 clc; 
 close all;
@@ -10,16 +13,18 @@ addpath([wdir,'/code/z_functions']);
 cd([wdir,'/data/ancillary_data']);
 phenoflux_metadata = readtable('pheno_flux_sites_to_use.csv','Delimiter',',');
 
-sites = phenoflux_metadata.fluxsite;
-vegtype = phenoflux_metadata.vegtype;
-primary_wd = phenoflux_metadata.primary_wd;
-measurement_heights = phenoflux_metadata.zr;
+sites = phenoflux_metadata.fluxsite; % Flux-site code
+vegtype = phenoflux_metadata.vegtype; % Vegtype of site
+primary_wd = phenoflux_metadata.primary_wd; % Primary wind direction for each site
+measurement_heights = phenoflux_metadata.zr; % Measurement height
 
 var_names = readtable('variables_to_import_for_fluxsites.csv','Delimiter',',');
 
+% What each site labeled for ZL and zr
 ZL_var_name = var_names.ZL;
 zr_var_name = var_names.zr;
 
+% Observed canopy height estimates
 obs_canopy_heights = [phenoflux_metadata.hc_low, ...
                       phenoflux_metadata.hc_high];
 
@@ -33,7 +38,12 @@ wd_range(wd_range > 360) = wd_range(wd_range > 360) - 360;
 k  = 0.41; % Von-Karman Constant
 
 window_size = 3;
-prop_missing_allowed = 0.95;
+prop_missing_allowed = 0.95; % allow up to 95% of data within each 
+                             % three day window to be missing.
+                             % We found that this in general
+                             % still provided enough info to 
+                             % estimate chanopy height for a 
+                             % three day window.
 
 for i = 1:length(sites)
 
@@ -46,6 +56,8 @@ for i = 1:length(sites)
     
     if isnan(obs_hc), obs_hc = 0; end       
     
+    % -----------------------------------------------
+    % Read in data
     % -----------------------------------------------
     cd([wdir,'/results/2_filtered_flux_data/24hr']);
     
@@ -66,9 +78,9 @@ for i = 1:length(sites)
     if strcmp(timestep,'HR'), t = 1; end      
     
     % -----------------------------------------------      
-    n = height(fluxdat);
-    n_per_window = 24 * t * window_size;
-    n_samp = ceil(n / n_per_window);
+    n = height(fluxdat); % nrows of data table
+    n_per_window = 24 * t * window_size; % Number of measurements per day
+    n_samp = ceil(n / n_per_window); % Number of days
     n_missing_allowed = floor(n_per_window * prop_missing_allowed);
     el = window_size - median(1:window_size);
     
@@ -81,8 +93,7 @@ for i = 1:length(sites)
     wind_direction = fluxdat.wind_direction; % [degrees]
     ustar = fluxdat.ustar; % [m s^-1]
     
-    % Find and filter by neutral log-wind profile conditions ------------------------
-    
+    % Find and filter by neutral log-wind profile conditions ------------------------   
     if strcmp(ZL_var_name(i),'NA')
         
         L = Monin_Obukhov_Length(t_air,ustar,H,pressure,false); % [m]
@@ -105,12 +116,16 @@ for i = 1:length(sites)
     
     zeta_neutral_bool = abs(zeta) < 0.1;
     
-    % -----------------------------------------------    
-    max_ustar = 0.6;
+    % -----------------------------------------------
+    % Limit ustar values to evaluate under
+    % -----------------------------------------------
+    max_ustar = 0.6;  
     if strcmp(vegtype(i),'DB') || strcmp(vegtype(i),'EN'), max_ustar = 1.0; end 
     ustar_bool = ustar >= 0.2 & ustar <= max_ustar;
     
-    % -----------------------------------------------  
+    % ----------------------------------------------- 
+    % Use only measurements in primary wind direction
+    % -----------------------------------------------
     if wd_range(i,1) < wd_range(i,2)
         
         wd_bool = wind_direction > wd_range(i,1) & wind_direction < wd_range(i,2);
@@ -121,14 +136,20 @@ for i = 1:length(sites)
         
     end
     
-    % -----------------------------------------------  
+    % -----------------------------------------------
+    % Observations to keep after filtering
+    % -----------------------------------------------
     to_keep_id = zeta_neutral_bool & ustar_bool & wd_bool;
     
     % -----------------------------------------------  
     ws_ustar_ratio_obs = k * wind_speed ./ ustar;
     ws_ustar_ratio_obs(~to_keep_id) = NaN;
     
-    % -----------------------------------------------  
+    % -----------------------------------------------
+    % Simple function to predict canopy height. Use
+    % a correction if measurement height is close to
+    % top of canopy.
+    % -----------------------------------------------
     ha_mod = @(ha,zr) log((zr - 0.7 * ha) ./ (0.1 * ha));
     
     if strcmp(vegtype(i),'DB') || strcmp(vegtype(i),'EN')
@@ -141,7 +162,10 @@ for i = 1:length(sites)
         
     end
     
-    % -----------------------------------------------  
+    % -----------------------------------------------
+    % Estimate canopy height by minimizing RMSE of
+    % observed wind/ustar ratio through optimization.
+    % -----------------------------------------------
  
     x = fluxdat.datetime_start(t*12:t*24:height(fluxdat));
     
@@ -161,7 +185,7 @@ for i = 1:length(sites)
         
         id = start_id:end_id;
         
-        obs = ws_ustar_ratio_obs(id);    
+        obs = ws_ustar_ratio_obs(id); % Observed wind/ustar ratio 
                         
         if sum(isnan(obs)) > n_missing_allowed
             day_cnt = day_cnt + window_size;
@@ -194,6 +218,7 @@ for i = 1:length(sites)
 
     end
     
+    % Export findings for given site
     export_table.date.Format = 'yyyy-MM-dd';
     export_table = setNaN(export_table,-9999);
  
